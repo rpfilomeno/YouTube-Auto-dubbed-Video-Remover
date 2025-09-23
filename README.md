@@ -1,3 +1,6 @@
+
+<img width="940" height="783" alt="Auto-Dubbed" src="https://github.com/user-attachments/assets/c3d1945d-1b95-4cdd-8315-bc52c822bf0f" />
+
 # YouTube Auto-dubbed Video Remover
 
 A userscript that automatically removes YouTube videos with "Auto-dubbed" badges from your feed, providing a cleaner viewing experience by filtering out auto-generated dubbed content.
