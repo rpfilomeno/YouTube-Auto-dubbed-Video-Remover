@@ -14,7 +14,7 @@
     function removeAutoDubbedVideos() {
 
         // Find all div elements with the target class
-        const videoItems = document.querySelectorAll('div.style-scope.ytd-rich-item-renderer');
+        const videoItems = document.querySelectorAll('div.ytd-rich-item-renderer');
 
         videoItems.forEach(item => {
             // Look for badge elements within this item
@@ -25,11 +25,13 @@
                 if (badge.textContent.trim() === 'Auto-dubbed') {
                     // Remove the entire video item
                     item.remove();
-                    console.log("Detected Auto-dubbed video and removed it!!!");
+                    console.log("🚨Remove Auto-dubbed YouTube Videos removed a video");
                 }
             });
         });
     }
+
+    console.log("🚀 Remove Auto-dubbed YouTube Videos is Active")
 
     // Run the function when the page loads
     removeAutoDubbedVideos();
@@ -44,8 +46,9 @@
                 mutation.addedNodes.forEach(function(node) {
                     if (node.nodeType === 1) { // Element node
                         if (node.classList && node.classList.contains('ytd-rich-item-renderer') ||
-                            node.querySelector && node.querySelector('.style-scope.ytd-rich-item-renderer')) {
+                            node.querySelector && node.querySelector('.ytd-rich-item-renderer')) {
                             shouldCheck = true;
+                            console.log("⚡ Remove Auto-dubbed YouTube Videos is scanning.")
                         }
                     }
                 });
