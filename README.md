@@ -91,7 +91,7 @@ The script is designed to be lightweight and efficient:
 ## Customization
 
 ### Modify Badge Text
-To remove videos with different badge text, change line 21:
+To remove videos with different badge text, change line 25:
 ```javascript
 if (badge.textContent.trim() === 'Your Custom Text') {
 ```
