@@ -22,10 +22,16 @@ You'll need a userscript manager browser extension installed:
 - **Firefox**: [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) or [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
 - **Safari**: [Userscripts](https://apps.apple.com/app/userscripts/id1463298887)
 
-### Installation Steps
+### Quick Installation Steps
+1. Install a userscript manager from the links above
+2. Click the RAW link to auto install: [![Install v1.0](https://img.shields.io/badge/version-1.0-blue)](https://github.com/rpfilomeno/YouTube-Auto-dubbed-Video-Remover/raw/refs/heads/main/Remove%20Auto-dubbed%20YouTube%20Videos-1.0.user.js)
+3. Open your userscript manager dashboard and enable the script
+4. Visit YouTube - auto-dubbed videos will now be automatically filtered out!
+
+### Manual Installation Steps
 
 1. Install a userscript manager from the links above
-2. Copy the userscript code from `youtube-autodub-remover.user.js`
+2. Copy the userscript code from `Remove Auto-dubbed YouTube Videos-1.0.user.js`
 3. Open your userscript manager dashboard
 4. Create a new userscript and paste the code
 5. Save and enable the script
