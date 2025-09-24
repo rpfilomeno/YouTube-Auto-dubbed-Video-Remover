@@ -100,19 +100,19 @@ The script is designed to be lightweight and efficient:
 ## Customization
 
 ### Modify Badge Text
-To remove videos with different badge text, change line 25:
+To remove videos with different badge text, change [line 25](https://github.com/rpfilomeno/YouTube-Auto-dubbed-Video-Remover/blob/a5e20797f69b2b4e7ed83bd1a5c170d25e3aba76/Remove%20Auto-dubbed%20YouTube%20Videos-1.0.user.js#L25):
 ```javascript
 if (badge.textContent.trim() === 'Your Custom Text') {
 ```
 
 ### Adjust Scan Frequency
-To change how often the script checks for new videos, modify the last line:
+To change how often the script checks for new videos, modify the [last line](https://github.com/rpfilomeno/YouTube-Auto-dubbed-Video-Remover/blob/a5e20797f69b2b4e7ed83bd1a5c170d25e3aba76/Remove%20Auto-dubbed%20YouTube%20Videos-1.0.user.js#L71):
 ```javascript
 setInterval(removeAutoDubbedVideos, 5000); // 5 seconds instead of 2
 ```
 
 ### Target Additional Classes
-To remove videos with other CSS classes, modify the selector on line 11:
+To remove videos with other CSS classes, modify the selector on [line 17](https://github.com/rpfilomeno/YouTube-Auto-dubbed-Video-Remover/blob/a5e20797f69b2b4e7ed83bd1a5c170d25e3aba76/Remove%20Auto-dubbed%20YouTube%20Videos-1.0.user.js#L17):
 ```javascript
 const videoItems = document.querySelectorAll('div.your-custom-class');
 ```
@@ -129,7 +129,7 @@ Found a bug or want to contribute improvements?
 
 ## License
 
-This project is licensed under the CC0 1.0 Universal
+This project is licensed under the [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/legalcode.en)
 
 ## Disclaimer
 
