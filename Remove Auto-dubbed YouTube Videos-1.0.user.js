@@ -14,7 +14,7 @@
     function removeAutoDubbedVideos() {
 
         // Find all div elements with the target class
-        const videoItems = document.querySelectorAll('div.ytd-rich-item-renderer');
+        const videoItems = document.querySelectorAll('#contents > ytd-rich-item-renderer');
 
         videoItems.forEach(item => {
             // Look for badge elements within this item
