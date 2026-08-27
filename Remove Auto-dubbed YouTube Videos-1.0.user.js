@@ -8,66 +8,45 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
 
-    'use strict';
-    function removeAutoDubbedVideos() {
 
-        // Find all div elements with the target class
-        const videoItems = document.querySelectorAll('#contents > ytd-rich-item-renderer');
+(function () {
+  'use strict';
 
-        videoItems.forEach(item => {
-            // Look for badge elements within this item
-            const badges = item.querySelectorAll('.yt-badge-shape__text');
-
-            badges.forEach(badge => {
-                // Check if the badge text is "Auto-dubbed"
-                if (badge.textContent.trim() === 'Auto-dubbed') {
-                    // Remove the entire video item
-                    item.remove();
-                    console.log("🚨Remove Auto-dubbed YouTube Videos removed a video");
-                }
-            });
-        });
-    }
-
-    console.log("🚀 Remove Auto-dubbed YouTube Videos is Active")
-
-    // Run the function when the page loads
-    removeAutoDubbedVideos();
-
-    // Create a MutationObserver to watch for dynamically loaded content
-    const observer = new MutationObserver(function(mutations) {
-        let shouldCheck = false;
-
-        mutations.forEach(function(mutation) {
-            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                // Check if any added nodes contain video items
-                mutation.addedNodes.forEach(function(node) {
-                    if (node.nodeType === 1) { // Element node
-                        if (node.classList && node.classList.contains('ytd-rich-item-renderer') ||
-                            node.querySelector && node.querySelector('.ytd-rich-item-renderer')) {
-                            shouldCheck = true;
-                            console.log("⚡ Remove Auto-dubbed YouTube Videos is scanning.")
-                        }
-                    }
-                });
-            }
-        });
-
-        if (shouldCheck) {
-            // Small delay to ensure content is fully loaded
-            setTimeout(removeAutoDubbedVideos, 100);
+  // 1. Hide the "Auto-dubbed" visual badge on thumbnails/titles
+  const style = document.createElement('style');
+  style.textContent = `
+        ytd-badge-supported-renderer:has(path[d*="M12 3"]),
+        .badge-shape-wiz:has(path[d*="M12 3"]),
+        ytd-badge-supported-renderer[aria-label*="Auto-dubbed"],
+        .badge-shape-wiz[aria-label*="Auto-dubbed"] {
+            display: none !important;
         }
-    });
+    `;
+  document.head.appendChild(style);
 
-    // Start observing the document for changes
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+  // 2. Automatically select the Original audio track in the player
+  function setOriginalAudio() {
+    const moviePlayer = document.getElementById('movie_player');
+    if (!moviePlayer || typeof moviePlayer.getAvailableAudioTracks !== 'function') return;
 
-    // Also run periodically as a fallback for any missed content
-    setInterval(removeAutoDubbedVideos, 2000);
+    const tracks = moviePlayer.getAvailableAudioTracks();
+    if (!tracks || tracks.length === 0) return;
 
+    // Find the original audio track
+    const originalTrack = tracks.find(
+      track => track.displayName.includes('original') || track.displayName.includes('Original') || track.isDefault
+    );
+
+    const currentTrack = moviePlayer.getAudioTrack();
+
+    if (originalTrack && currentTrack && currentTrack.languageCode !== originalTrack.languageCode) {
+      moviePlayer.setAudioTrack(originalTrack);
+      console.log('[Userscript] Switched audio track to:', originalTrack.displayName);
+    }
+  }
+
+  // Listen for video page changes & playback starts
+  window.addEventListener('yt-navigate-finish', setOriginalAudio);
+  document.addEventListener('timeupdate', setOriginalAudio, { once: true });
 })();
